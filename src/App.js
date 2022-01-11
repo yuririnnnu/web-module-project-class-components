@@ -2,17 +2,18 @@ import React from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 
+import './components/Todo.css';
 
-const todos = [
+const tasks = [
   {
-    name: 'Finish this assignment',
+    task: 'Finish this assignment',
     id: 1,
-    done: false  
+    completed: false  
   },
   {
-    name: 'Finish this assignment',
+    task: 'Finish this assignment',
     id: 2,
-    done: false  
+    completed: false  
   }
 ]
 class App extends React.Component {
@@ -22,51 +23,52 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos:todos
+      tasks:tasks
     };
   }
 
-  handleAddTodo = (todoName) => {
-    const newTodo = {
-      name:todoName,
+  handleAddTask = (taskName) => {
+    const newTask = {
+      task:taskName,
       id: Date.now(),
-      done: false
+      completed: false
     }
     this.setState({
       ...this.state,
-      todos: [...this.state.todos, newTodo]
+      tasks: [...this.state.tasks, newTask]
     })
   }
-  handleToggleTodo = (selectedTodo) => {
+  handleToggleTask = (selectedTask) => {
     this.setState({
       ...this.state,
-      todos: this.state.todos.map(todo => {
-        if(this.id === selectedTodo.id) {
+      tasks: this.state.tasks.map(task => {
+        if(task.id === selectedTask.id) {
           return({
-            ...todo,
-            done: !todo.done
+            ...task,
+            completed: !task.completed
           })
         } else {
-          return todo
+          return task
         } 
       })
     })
   }
-  handleClearTodo = () => {
+  handleClearTask = () => {
     this.setState({
       ...this.state,
-      todos: this.state.todos.filter(todo=>{
-        return !todo.done
+      tasks: this.state.tasks.filter(task => {
+        return !task.completed
       })
     })
   }
   render() {
+    console.log(this.state.tasks)
     return (
       <div>        
-        <h1>Todos!</h1>
-        <TodoForm handleAddTodo={this.handleAddTodo} />
-        <TodoList handleToggleTodo={this.handleToggleTodo} todos={this.state.todos} />
-        <button onClick={this.handleClearTodo}>Done</button>
+        <h1>Tasks!</h1>
+        <TodoForm handleAddTask={this.handleAddTask} />
+        <TodoList handleToggleTask={this.handleToggleTask} tasks={this.state.tasks} />
+        <button onClick={this.handleClearTask}>Clear Completed</button>
       </div>
     );
   }

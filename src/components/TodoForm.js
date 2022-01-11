@@ -15,13 +15,13 @@ export default class TodoForm extends React.Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        this.props.handleAddTodo(this.state.input)
+        this.props.handleAddTask(this.state.input)
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input onChange={this.handleChanges} type='text' name='item' />
+                <input onChange={this.handleChanges} type='text' name='task' />
                 <button>Add Todo</button>
             </form> 
         );

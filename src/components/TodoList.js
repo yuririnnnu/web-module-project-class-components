@@ -5,12 +5,12 @@ import Todo from './Todo';
 
 export default class TodoList extends React.Component {
     render(){
-        console.log(this.props.todos)
+        console.log('TodoList',this.props)
         return (
             <div className="todoList">
                 {
-                    this.props.todos.map(todo => {
-                        return <Todo handleToggleTodo={this.props.handleToggleTodo} key={todo.id} todo={todo} />
+                    this.props.tasks.map(task => {
+                        return <Todo handleToggleTask={this.props.handleToggleTask} key={task.id} task={task} />
                     })
                 }
             </div>    
